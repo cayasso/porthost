@@ -1,6 +1,6 @@
 {
   "name": "porthost",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Connection and listener addresses made easy for tcp, http and any (port, host, fn) method",
   "author": {
     "name": "Jonathan Brumley",
