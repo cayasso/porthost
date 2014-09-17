@@ -49,10 +49,25 @@ function address(port, host, fn) {
       host = undefined;    
     } else if ('number' === typeof port) {
       host = host || DEFAULT_HOST;
+
+      // We check to see if this host string has
+      // a protocol, if it does then we asign
+      // host name to host.
+      if (IS_PROTOCOL.test(host)) {
+        host = url.parse(host);
+        host = host.hostname;
+      }
+
     } else if ('object' === typeof port) {
-      fn = host;
+
       host = port.address || port.host;
       port = port.port;
+      
+      var res = address(port, host, fn);
+
+      host = res.host;
+      port = res.port;
+
     } else if ('string' === typeof port) {
 
       // Test to see if this is a valid number

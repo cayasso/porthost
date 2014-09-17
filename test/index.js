@@ -125,9 +125,38 @@ describe('verifyd-address', function(){
   });
 
   it('should accept tcp protocol as second argument', function () {
+    address(8080, 'tcp://1.2.3.4').should.be.eql({
+      host: '1.2.3.4',
+      port: 8080
+    });
+  });
+
+  it('should accept string port with tcp protocol as second argument', function () {
     address('8080', 'tcp://1.2.3.4').should.be.eql({
       host: '1.2.3.4',
       port: 8080
+    });
+  });
+
+  it('should accept :port with tcp protocol as second argument', function () {
+    address(':8080', 'tcp://1.2.3.4').should.be.eql({
+      host: '1.2.3.4',
+      port: 8080
+    });
+  });  
+
+  it('should accept tcp protocol as second argument', function () {
+    address({ port: 8080, host: 'tcp://1.2.3.4' }).should.be.eql({
+      host: '1.2.3.4',
+      port: 8080
+    });
+  });
+
+  it('should accept object tcp protocol as second argument and function', function () {
+    address({ port: 8080, host: 'tcp://1.2.3.4' }, fn).should.be.eql({
+      host: '1.2.3.4',
+      port: 8080,
+      fn: fn
     });
   });
 
